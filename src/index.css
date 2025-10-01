@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-white/10;
+  }
+
+  body {
+    @apply bg-space-dark text-white;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .space-gradient {
+    background: radial-gradient(
+        1200px 700px at 70% -10%,
+        #1b2660 0%,
+        transparent 60%
+      ),
+      radial-gradient(900px 600px at -20% 10%, #0f1a3f 0%, transparent 50%),
+      #0b1020;
+  }
+}
