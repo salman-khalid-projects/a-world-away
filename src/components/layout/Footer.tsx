@@ -14,7 +14,16 @@ export const Footer: React.FC = () => {
           )}
         >
           <p>Built for NASA Space Apps 2025 — UI Prototype</p>
-          <p>Team: Nada Ayman - Al Iman School</p>
+          <p className="flex items-center gap-2">
+            <span>
+              <img
+                className="w-4 h-4 rounded-full"
+                src="/dist/expace.svg"
+                alt="Expace"
+              />
+            </span>
+            <span>Team: Expace - Al Iman School</span>
+          </p>
         </div>
       </div>
     </footer>

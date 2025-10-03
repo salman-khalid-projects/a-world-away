@@ -71,7 +71,7 @@ export const ScreenTransition: React.FC<ScreenTransitionProps> = ({
       animate="animate"
       exit="exit"
       transition={{
-        duration: direction === "fade" ? 0.8 : 0.6,
+        duration: direction === "fade" ? 0.4 : 0.6,
         ease:
           direction === "fade" ? [0.25, 0.46, 0.45, 0.94] : [0.4, 0.0, 0.2, 1], // Smooth fade easing
       }}
