@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../ui/Button";
 import { Card } from "../ui/Card";
@@ -338,4 +338,3 @@ export const StarPicker: React.FC<StarPickerProps> = ({
     </div>
   );
 };
-
