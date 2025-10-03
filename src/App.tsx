@@ -107,14 +107,14 @@ function App() {
     switch (currentScreen) {
       case "hero":
         return (
-          <PageTransition key="hero" direction="up">
+          <PageTransition key="hero" direction="fade">
             <HeroSection onStartJourney={handleStartJourney} />
           </PageTransition>
         );
 
       case "star-picker":
         return (
-          <PageTransition key="star-picker" direction="down">
+          <PageTransition key="star-picker" direction="fade">
             <StarPicker
               onStarSelect={handleStarSelect}
               onManualInput={handleManualInput}
@@ -126,7 +126,7 @@ function App() {
 
       case "analysis":
         return (
-          <PageTransition key="analysis" direction="down">
+          <PageTransition key="analysis" direction="fade">
             <MainLayout
               judgesMode={judgesMode}
               onToggleJudgesMode={() => setJudgesMode(!judgesMode)}

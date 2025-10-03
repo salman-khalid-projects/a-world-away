@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export interface ScreenTransitionProps {
   children: React.ReactNode;
-  direction?: "left" | "right" | "up" | "down";
+  direction?: "left" | "right" | "up" | "down" | "fade";
   className?: string;
 }
 
@@ -51,6 +51,13 @@ export const ScreenTransition: React.FC<ScreenTransitionProps> = ({
           animate: { ...baseVariants.animate, y: 0 },
           exit: { ...baseVariants.exit, y: 100 },
         };
+      case "fade":
+        return {
+          ...baseVariants,
+          initial: { ...baseVariants.initial, scale: 0.95 },
+          animate: { ...baseVariants.animate, scale: 1 },
+          exit: { ...baseVariants.exit, scale: 1.05 },
+        };
       default:
         return baseVariants;
     }
@@ -64,8 +71,9 @@ export const ScreenTransition: React.FC<ScreenTransitionProps> = ({
       animate="animate"
       exit="exit"
       transition={{
-        duration: 0.6,
-        ease: [0.4, 0.0, 0.2, 1], // Custom easing for smooth feel
+        duration: direction === "fade" ? 0.8 : 0.6,
+        ease:
+          direction === "fade" ? [0.25, 0.46, 0.45, 0.94] : [0.4, 0.0, 0.2, 1], // Smooth fade easing
       }}
     >
       {children}
@@ -79,7 +87,7 @@ export const ScreenTransition: React.FC<ScreenTransitionProps> = ({
 export const PageTransition: React.FC<{
   children: React.ReactNode;
   key: string | number;
-  direction?: "left" | "right" | "up" | "down";
+  direction?: "left" | "right" | "up" | "down" | "fade";
   className?: string;
 }> = ({ children, key, direction = "right", className = "" }) => {
   return (
@@ -90,4 +98,3 @@ export const PageTransition: React.FC<{
     </AnimatePresence>
   );
 };
-

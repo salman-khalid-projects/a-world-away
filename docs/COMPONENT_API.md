@@ -186,7 +186,7 @@ interface HeaderProps {
 
 ### HeroSection
 
-Landing page hero with background video and call-to-action.
+Landing page hero with background video, call-to-action, and interactive scroll functionality.
 
 ```tsx
 interface HeroSectionProps {
@@ -200,6 +200,16 @@ interface HeroSectionProps {
 - Animated text and floating elements
 - Responsive design with mobile optimization
 - Smooth entrance animations
+- **Interactive scroll functionality** - automatically navigates to star-picker when user scrolls down
+- **Visual scroll progress indicator** - shows scroll progress with animated feedback
+- **Dynamic scroll indicator text** - changes from "Scroll to explore" to "Keep scrolling..." based on scroll progress
+
+**Scroll Behavior:**
+
+- Triggers navigation when user scrolls down more than 20% of viewport height
+- Includes 300ms delay to prevent accidental triggers
+- Visual feedback shows scroll progress with animated mouse icon
+- Progress indicator fills the scroll icon as user scrolls
 
 **Usage:**
 
