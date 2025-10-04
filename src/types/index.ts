@@ -36,6 +36,61 @@ export interface TargetInfo {
   status: "Candidate" | "Confirmed" | "False Positive";
 }
 
+// Exoplanet Classification Types
+export type ExoplanetDisposition = "CONFIRMED" | "CANDIDATE" | "FALSE POSITIVE";
+
+export interface ExoplanetPhysicalData {
+  // Core orbital characteristics
+  period: number; // Orbital period (days)
+  duration: number; // Transit duration (hours)
+
+  // Planetary properties
+  prad: number; // Planet radius (Earth radii)
+
+  // Stellar properties
+  teff: number; // Stellar effective temperature (K)
+  logg: number; // Stellar surface gravity (log g)
+  srad: number; // Stellar radius (Solar radii)
+  mag: number; // Stellar magnitude (brightness)
+
+  // Derived features (calculated)
+  radius_ratio: number; // prad / srad
+  orbital_density: number; // prad / period
+}
+
+export interface ExoplanetClassification {
+  disposition: ExoplanetDisposition;
+  confidence: number;
+  probabilities: {
+    CONFIRMED: number;
+    CANDIDATE: number;
+    FALSE_POSITIVE: number;
+  };
+  model_used: "XGBoost" | "Hybrid" | "LSTM";
+}
+
+export interface StarData {
+  id: string;
+  name: string;
+  mission: "TESS" | "Kepler" | "K2";
+  coordinates: {
+    ra: number;
+    dec: number;
+  };
+  physical: ExoplanetPhysicalData;
+  classification?: ExoplanetClassification;
+  light_curve?: LightCurveData[];
+  discovery_date?: string;
+  last_updated?: string;
+}
+
+export interface ModelPrediction {
+  input_data: ExoplanetPhysicalData;
+  prediction: ExoplanetClassification;
+  feature_importance: FeatureImportance[];
+  model_accuracy: number;
+}
+
 export interface TabConfig {
   id: string;
   label: string;

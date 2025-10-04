@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
             <span>
               <img
                 className="w-4 h-4 rounded-full"
-                src="/dist/expace.svg"
+                src="/dist/assets/expace-CGAsMBDL.svg"
                 alt="Expace"
               />
             </span>
