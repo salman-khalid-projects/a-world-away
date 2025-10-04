@@ -185,12 +185,12 @@ export const StarPicker: React.FC<StarPickerProps> = ({
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center"
         >
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
             Pick a Star
           </h1>
-          <p className="text-xl text-white/70 mb-8">
+          <p className="text-xl text-white/70">
             Click on any star to analyze with our AI models
           </p>
         </motion.div>
