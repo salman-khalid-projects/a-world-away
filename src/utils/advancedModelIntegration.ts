@@ -162,14 +162,14 @@ function predictTESSXGBoost(normalizedFeatures: number[]): {
 } {
   const [
     period,
-    duration,
+    _duration,
     prad,
     teff,
-    logg,
-    srad,
-    mag,
+    _logg,
+    _srad,
+    _mag,
     radius_ratio,
-    orbital_density,
+    _orbital_density,
   ] = normalizedFeatures;
 
   // Denormalize for decision making
@@ -291,7 +291,7 @@ function predictImproveTESSLSTM(normalizedFeatures: number[]): {
   probabilities: number[];
   prediction: number;
 } {
-  const [time, flux] = normalizedFeatures;
+  const [_time, flux] = normalizedFeatures;
 
   // Denormalize
   const actualFlux =
@@ -340,7 +340,7 @@ function convertTESSDisposition(
   ) {
     disposition = "CANDIDATE";
   } else {
-    disposition = "FALSE POSITIVE";
+    disposition = "FALSE_POSITIVE";
   }
 
   const confidence = Math.max(...probabilities);
@@ -353,10 +353,9 @@ function convertTESSDisposition(
       CANDIDATE: ["PC", "APC", "KP"].includes(rawDisposition)
         ? confidence
         : 0.1,
-      "FALSE POSITIVE": ["FP", "FA"].includes(rawDisposition)
-        ? confidence
-        : 0.1,
+      FALSE_POSITIVE: ["FP", "FA"].includes(rawDisposition) ? confidence : 0.1,
     },
+    model_used: "XGBoost",
   };
 }
 
@@ -376,7 +375,7 @@ function convertTESSKeplerDisposition(
   } else if (rawDisposition === "Candidate") {
     disposition = "CANDIDATE";
   } else {
-    disposition = "FALSE POSITIVE";
+    disposition = "FALSE_POSITIVE";
   }
 
   const confidence = Math.max(...probabilities);
@@ -387,8 +386,9 @@ function convertTESSKeplerDisposition(
     probabilities: {
       CONFIRMED: rawDisposition === "Confirmed" ? confidence : 0.1,
       CANDIDATE: rawDisposition === "Candidate" ? confidence : 0.1,
-      "FALSE POSITIVE": rawDisposition === "No Planet" ? confidence : 0.1,
+      FALSE_POSITIVE: rawDisposition === "No Planet" ? confidence : 0.1,
     },
+    model_used: "LSTM",
   };
 }
 
@@ -408,7 +408,7 @@ function convertImproveTESSDisposition(
   } else if (rawDisposition === "Candidate") {
     disposition = "CANDIDATE";
   } else {
-    disposition = "FALSE POSITIVE";
+    disposition = "FALSE_POSITIVE";
   }
 
   const confidence = Math.max(...probabilities);
@@ -419,8 +419,9 @@ function convertImproveTESSDisposition(
     probabilities: {
       CONFIRMED: rawDisposition === "Confirmed" ? confidence : 0.1,
       CANDIDATE: rawDisposition === "Candidate" ? confidence : 0.1,
-      "FALSE POSITIVE": rawDisposition === "No Planet" ? confidence : 0.1,
+      FALSE_POSITIVE: rawDisposition === "No Planet" ? confidence : 0.1,
     },
+    model_used: "LSTM",
   };
 }
 
@@ -485,8 +486,9 @@ export function classifyExoplanetWithAdvancedModels(
       probabilities: {
         CONFIRMED: 0.3,
         CANDIDATE: 0.5,
-        "FALSE POSITIVE": 0.2,
+        FALSE_POSITIVE: 0.2,
       },
+      model_used: "XGBoost",
     };
   }
 }
@@ -533,8 +535,9 @@ export function classifyExoplanetWithAutoModel(
         probabilities: {
           CONFIRMED: 0.3,
           CANDIDATE: 0.5,
-          "FALSE POSITIVE": 0.2,
+          FALSE_POSITIVE: 0.2,
         },
+        model_used: "XGBoost",
       };
     }
   }

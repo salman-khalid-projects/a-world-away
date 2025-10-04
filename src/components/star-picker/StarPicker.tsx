@@ -120,7 +120,7 @@ export const StarPicker: React.FC<StarPickerProps> = ({
         return "0 0 20px rgba(16, 185, 129, 0.6)";
       case "CANDIDATE":
         return "0 0 20px rgba(245, 158, 11, 0.6)";
-      case "FALSE POSITIVE":
+      case "FALSE_POSITIVE":
         return "0 0 20px rgba(239, 68, 68, 0.6)";
       default:
         return "0 0 15px rgba(255, 255, 255, 0.3)";
@@ -134,7 +134,7 @@ export const StarPicker: React.FC<StarPickerProps> = ({
         return "#10b981";
       case "CANDIDATE":
         return "#f59e0b";
-      case "FALSE POSITIVE":
+      case "FALSE_POSITIVE":
         return "#ef4444";
       default:
         return "#ffffff";

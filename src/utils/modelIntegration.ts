@@ -111,14 +111,14 @@ function predictXGBoost(normalizedFeatures: number[]): {
 } {
   const [
     period,
-    duration,
+    _duration,
     prad,
     teff,
-    logg,
-    srad,
-    mag,
+    _logg,
+    _srad,
+    _mag,
     radius_ratio,
-    orbital_density,
+    _orbital_density,
   ] = normalizedFeatures;
 
   // Denormalize for decision making
@@ -135,7 +135,7 @@ function predictXGBoost(normalizedFeatures: number[]): {
     radius_ratio * NORMALIZATION_PARAMS.radius_ratio.std +
     NORMALIZATION_PARAMS.radius_ratio.mean;
   const actualOrbitalDensity =
-    orbital_density * NORMALIZATION_PARAMS.orbital_density.std +
+    _orbital_density * NORMALIZATION_PARAMS.orbital_density.std +
     NORMALIZATION_PARAMS.orbital_density.mean;
 
   let confirmedScore = 0.1;
@@ -310,8 +310,9 @@ function predictHybrid(
     probabilities: {
       CONFIRMED: hybridProbabilities[1],
       CANDIDATE: hybridProbabilities[0],
-      "FALSE POSITIVE": hybridProbabilities[2],
+      FALSE_POSITIVE: hybridProbabilities[2],
     },
+    model_used: "Hybrid",
   };
 }
 
@@ -347,8 +348,9 @@ export function classifyExoplanetWithTrainedModels(
       probabilities: {
         CONFIRMED: 0.3,
         CANDIDATE: 0.5,
-        "FALSE POSITIVE": 0.2,
+        FALSE_POSITIVE: 0.2,
       },
+      model_used: "Hybrid",
     };
   }
 }

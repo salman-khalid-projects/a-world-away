@@ -37,7 +37,7 @@ export interface TargetInfo {
 }
 
 // Exoplanet Classification Types
-export type ExoplanetDisposition = "CONFIRMED" | "CANDIDATE" | "FALSE POSITIVE";
+export type ExoplanetDisposition = "CONFIRMED" | "CANDIDATE" | "FALSE_POSITIVE";
 
 export interface ExoplanetPhysicalData {
   // Core orbital characteristics
