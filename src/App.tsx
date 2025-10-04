@@ -10,8 +10,6 @@ import { Tabs } from "./components/ui/Tabs";
 import { OverviewTab } from "./components/analysis/OverviewTab";
 import { DetectionTab } from "./components/analysis/DetectionTab";
 import { ExplainabilityTab } from "./components/analysis/ExplainabilityTab";
-import { CatalogTab } from "./components/analysis/CatalogTab";
-import { MethodsTab } from "./components/analysis/MethodsTab";
 import { TabConfig, StarData } from "./types";
 import { generateDemoData } from "./data/demoData";
 
@@ -20,8 +18,6 @@ const tabs: TabConfig[] = [
   { id: "overview", label: "Overview" },
   { id: "detection", label: "Detection" },
   { id: "explain", label: "Explainability" },
-  { id: "catalog", label: "Catalog" },
-  { id: "methods", label: "Methods" },
 ];
 
 // App flow states
@@ -63,29 +59,38 @@ function App() {
   const renderTabContent = () => {
     switch (tab) {
       case "overview":
-        return <OverviewTab verdict={demoData.verdict} />;
+        return selectedStar ? (
+          <OverviewTab star={selectedStar} />
+        ) : (
+          <div className="text-center py-12">
+            <p className="text-white/60 text-lg">No star selected</p>
+            <p className="text-white/40 text-sm mt-2">
+              Please select a star to view overview analysis
+            </p>
+          </div>
+        );
       case "detection":
-        return (
-          <DetectionTab
-            rawLightCurve={demoData.rawLightCurve}
-            detrended={demoData.detrended}
-            periodogram={demoData.periodogram}
-            phaseFolded={demoData.phaseFolded}
-          />
+        return selectedStar ? (
+          <DetectionTab star={selectedStar} />
+        ) : (
+          <div className="text-center py-12">
+            <p className="text-white/60 text-lg">No star selected</p>
+            <p className="text-white/40 text-sm mt-2">
+              Please select a star to view detection analysis
+            </p>
+          </div>
         );
       case "explain":
-        return (
-          <ExplainabilityTab featureImportances={demoData.featureImportances} />
+        return selectedStar ? (
+          <ExplainabilityTab star={selectedStar} />
+        ) : (
+          <div className="text-center py-12">
+            <p className="text-white/60 text-lg">No star selected</p>
+            <p className="text-white/40 text-sm mt-2">
+              Please select a star to view explainability analysis
+            </p>
+          </div>
         );
-      case "catalog":
-        return (
-          <CatalogTab
-            targets={demoData.targets}
-            onTargetSelect={() => handleTargetSelect()}
-          />
-        );
-      case "methods":
-        return <MethodsTab />;
       default:
         return null;
     }
